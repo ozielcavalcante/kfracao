@@ -11,6 +11,10 @@ class Fracao(numerador: Int, denominador: Int = 1) {
         this.denominador = if (denominador < 0) -denominador else denominador
     }
 
+    operator fun unaryMinus() = Fracao(-numerador, denominador)
+
+    operator fun minus(b: Fracao) = plus(-b)
+
     operator fun plus(b: Fracao) =
         if (denominador != b.denominador) somarComDenomiadorComum(b)
         else fracaoSimplificada(numerador + b.numerador, denominador)
