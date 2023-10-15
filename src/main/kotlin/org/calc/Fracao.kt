@@ -11,10 +11,6 @@ class Fracao(numerador: Int, denominador: Int = 1) {
         this.denominador = if (denominador < 0) -denominador else denominador
     }
 
-    operator fun unaryMinus() = Fracao(-numerador, denominador)
-
-    operator fun minus(b: Fracao) = plus(-b)
-
     operator fun plus(b: Fracao) =
         if (denominador != b.denominador) somarComDenomiadorComum(b)
         else fracaoSimplificada(numerador + b.numerador, denominador)
@@ -25,13 +21,22 @@ class Fracao(numerador: Int, denominador: Int = 1) {
         return fracaoSimplificada(novoNumerador, denominadorComum)
     }
 
+    operator fun minus(b: Fracao) = plus(Fracao(-b.numerador, b.denominador))
+
+    operator fun times(b: Fracao) = fracaoSimplificada(numerador * b.numerador, denominador * b.denominador)
+
+    operator fun div(b: Fracao): Fracao {
+        if (numerador == 0 && b.numerador == 0) {
+            throw IllegalArgumentException("0/0 -> Resultado indefinido")
+        }
+        require(b.numerador != 0) { "Não é possível dividir por zero" }
+
+        return times(Fracao(b.denominador, b.numerador))
+    }
+
     private fun fracaoSimplificada(numerador: Int, denominador: Int): Fracao {
         val mdc = mdc(numerador, denominador)
         return Fracao(numerador / mdc, denominador / mdc)
-    }
-
-    private fun mdc(a: Int, b: Int): Int {
-        return if (b == 0) a else mdc(b, a % b)
     }
 
     override fun equals(other: Any?) =
@@ -40,4 +45,8 @@ class Fracao(numerador: Int, denominador: Int = 1) {
     override fun hashCode() = Objects.hash(numerador, denominador)
 
     override fun toString() = "$numerador/$denominador"
+}
+
+tailrec fun mdc(a: Int, b: Int): Int {
+    return if (b == 0) a else mdc(b, a % b)
 }
