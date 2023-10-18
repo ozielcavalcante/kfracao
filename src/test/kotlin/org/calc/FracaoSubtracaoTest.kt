@@ -22,6 +22,13 @@ class FracaoSubtracaoTest {
     }
 
     @Test
+    fun um_terco_menos_um_terco_deve_retornar_zero() {
+        val a = Fracao(1, 3)
+        val b = Fracao(1, 3)
+        assertEquals(Fracao(0), a - b)
+    }
+
+    @Test
     fun mesmo_denominador() {
         val a = Fracao(5, 3)
         val b = Fracao(1, 3)

@@ -11,7 +11,7 @@ class FracaoDivisaoTest {
         val a = Fracao(0)
         val b = Fracao(0)
         val e = assertThrows(IllegalArgumentException::class.java) { a / b }
-        assertEquals("Resultado indefinido", e.message)
+        assertEquals("0/0 -> Resultado indefinido", e.message)
     }
 
     @Test
