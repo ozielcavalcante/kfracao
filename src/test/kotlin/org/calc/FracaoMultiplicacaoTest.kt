@@ -1,42 +1,40 @@
 package org.calc
 
-import jdk.jfr.Description
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 
 class FracaoMultiplicacaoTest {
 
     @Test
-    fun zero_vezes_zero_deve_retornar_zero() {
+    fun `zero vezes zero deve retornar zero`() {
         val a = Fracao(0)
         val b = Fracao(0)
         assertEquals(Fracao(0), a * b)
     }
 
     @Test
-    fun dois_vezes_zero_deve_retornar_zero() {
+    fun `dois vezes zero deve retornar zero`() {
         val a = Fracao(2)
         val b = Fracao(0)
         assertEquals(Fracao(0), a * b)
     }
 
     @Test
-    fun dois_vezes_um_deve_retornar_dois() {
+    fun `dois vezes um deve retornar dois`() {
         val a = Fracao(2)
         val b = Fracao(1)
         assertEquals(Fracao(2), a * b)
     }
 
     @Test
-    fun positivo_vezes_negativo() {
+    fun `positivo vezes negativo`() {
         val a = Fracao(4, 5)
         val b = Fracao(-1, 3)
         assertEquals(Fracao(-4, 15), a * b)
     }
 
     @Test
-    fun negativo_vezes_negativo() {
+    fun `negativo vezes negativo`() {
         // -1/3 + (-4/5) = -5/15 + (-12/15) = 7/15
         val a = Fracao(-4, 5)
         val b = Fracao(-1, 3)
@@ -44,14 +42,14 @@ class FracaoMultiplicacaoTest {
     }
 
     @Test
-    fun produto_nao_simplificavel() {
+    fun `produto nao simplificavel`() {
         val a = Fracao(5, 2)
         val b = Fracao(1, 3)
         assertEquals(Fracao(5, 6), a * b)
     }
 
     @Test
-    fun produto_simplificavel() {
+    fun `produto simplificavel`() {
         val a = Fracao(6, 3)
         val b = Fracao(1, 5)
         assertEquals(Fracao(2, 5), a * b)

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test
 class FracaoDivisaoTest {
 
     @Test
-    fun zero_dividido_zero_deve_lancar_excecao() {
+    fun `zero dividido zero deve lancar excecao`() {
         val a = Fracao(0)
         val b = Fracao(0)
         val e = assertThrows(IllegalArgumentException::class.java) { a / b }
@@ -15,7 +15,7 @@ class FracaoDivisaoTest {
     }
 
     @Test
-    fun dois_dividido_zero_deve_lancar_excecao() {
+    fun `dois dividido zero deve lancar excecao`() {
         val a = Fracao(2)
         val b = Fracao(0)
         val e = assertThrows(IllegalArgumentException::class.java) { a / b }
@@ -23,21 +23,21 @@ class FracaoDivisaoTest {
     }
 
     @Test
-    fun dois_dividido_um_deve_retornar_dois() {
+    fun `dois dividido um deve retornar dois`() {
         val a = Fracao(2)
         val b = Fracao(1)
         assertEquals(Fracao(2), a / b)
     }
 
     @Test
-    fun positivo_dividido_negativo() {
+    fun `positivo dividido negativo`() {
         val a = Fracao(4, 5)
         val b = Fracao(-1, 3)
         assertEquals(Fracao(-12, 5), a / b)
     }
 
     @Test
-    fun negativo_dividido_negativo() {
+    fun `negativo dividido negativo`() {
         // -1/3 + (-4/5) = -5/15 + (-12/15) = 7/15
         val a = Fracao(-4, 5)
         val b = Fracao(-1, 3)
@@ -45,14 +45,14 @@ class FracaoDivisaoTest {
     }
 
     @Test
-    fun produto_nao_simplificavel() {
+    fun `produto nao simplificavel`() {
         val a = Fracao(3, 2)
         val b = Fracao(1, 5)
         assertEquals(Fracao(15, 2), a / b)
     }
 
     @Test
-    fun produto_simplificavel() {
+    fun `produto simplificavel`() {
         val a = Fracao(5, 6)
         val b = Fracao(5, 2)
         assertEquals(Fracao(1, 3), a / b)
