@@ -5,6 +5,7 @@ import java.util.*
 class Fracao(numerador: Int, denominador: Int = 1) {
     val denominador: Int
     val numerador: Int
+
     init {
         require(denominador != 0) { "Denominador não pode ser zero" }
         this.numerador = if (denominador < 0) -numerador else numerador
@@ -26,12 +27,15 @@ class Fracao(numerador: Int, denominador: Int = 1) {
     operator fun times(b: Fracao) = fracaoSimplificada(numerador * b.numerador, denominador * b.denominador)
 
     operator fun div(b: Fracao): Fracao {
+        validaDiv(b)
+        return times(Fracao(b.denominador, b.numerador))
+    }
+
+    private fun validaDiv(b: Fracao) {
         if (numerador == 0 && b.numerador == 0) {
             throw IllegalArgumentException("0/0 -> Resultado indefinido")
         }
         require(b.numerador != 0) { "Não é possível dividir por zero" }
-
-        return times(Fracao(b.denominador, b.numerador))
     }
 
     private fun fracaoSimplificada(numerador: Int, denominador: Int): Fracao {
