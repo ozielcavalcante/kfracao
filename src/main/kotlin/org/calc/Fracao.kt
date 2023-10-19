@@ -22,7 +22,6 @@ class Fracao(numerador: Int, denominador: Int = 1) {
 
     operator fun div(b: Fracao): Fracao {
         validaDiv(b)
-
         return times(Fracao(b.denominador, b.numerador))
     }
 
