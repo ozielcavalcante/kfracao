@@ -13,14 +13,14 @@ class Fracao(numerador: Int, denominador: Int = 1) {
     }
 
     operator fun plus(b: Fracao) =
-        if (denominador != b.denominador) somarComDenomiadorComum(b)
-        else fracaoSimplificada(numerador + b.numerador, denominador)
+        if (denominador == b.denominador) fracaoSimplificada(numerador + b.numerador, denominador)
+        else somarComDenomiadorComum(b)
 
-    private fun somarComDenomiadorComum(b: Fracao): Fracao {
-        val denominadorComum = denominador * b.denominador
-        val novoNumerador = numerador * b.denominador + b.numerador * denominador
-        return fracaoSimplificada(novoNumerador, denominadorComum)
-    }
+    private fun somarComDenomiadorComum(b: Fracao) =
+        fracaoSimplificada(
+            numerador * b.denominador + b.numerador * denominador,
+            denominador * b.denominador
+        )
 
     operator fun minus(b: Fracao) = plus(Fracao(-b.numerador, b.denominador))
 
@@ -48,7 +48,7 @@ class Fracao(numerador: Int, denominador: Int = 1) {
 
     override fun hashCode() = Objects.hash(numerador, denominador)
 
-    override fun toString() = "$numerador/$denominador"
+    override fun toString() = if (denominador == 1) "$numerador" else "$numerador/$denominador"
 }
 
 tailrec fun mdc(a: Int, b: Int): Int {
