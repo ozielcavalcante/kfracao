@@ -4,11 +4,12 @@ import kotlin.system.exitProcess
 fun main() {
     while (true) {
         val entrada = readln()
-        if (entrada.startsWith("sair"))
+        if (entrada.startsWith("s"))
             exitProcess(0)
 
-        val args = entrada.split(" ")
+        val args = entrada.split("""\s+""".toRegex())
         try {
+            valida(args)
             val op = args[1]
 
             val f1 = fracao(*ints(args[0]))
@@ -28,6 +29,11 @@ fun main() {
             println("entrada inválida: $m")
         }
     }
+}
+
+fun valida(args: List<String>) {
+    if (args.any { a -> a.replace("[0-9]".toRegex(), "").length > 1 })
+        throw IllegalArgumentException("separe as operações")
 }
 
 private fun ints(texto: String) = texto.split('/').map { t -> t.toInt() }.toIntArray()
