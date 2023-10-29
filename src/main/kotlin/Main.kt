@@ -4,7 +4,7 @@ import kotlin.system.exitProcess
 fun main() {
     while (true) {
         val entrada = readln()
-        if (entrada.startsWith("s"))
+        if (entrada.trim() == "s")
             exitProcess(0)
 
         val args = entrada.split("""\s+""".toRegex())
@@ -19,7 +19,7 @@ fun main() {
                 "+" -> f1 + f2
                 "-" -> f1 - f2
                 "*" -> f1 * f2
-                "/" -> f1 / f2
+                ":" -> f1 / f2
                 else -> null
             }
 
