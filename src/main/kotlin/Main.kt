@@ -3,17 +3,16 @@ import kotlin.system.exitProcess
 
 fun main() {
     while (true) {
-        val entrada = readln()
+        val entrada = readln().replace("\\s".toRegex(), "")
         if (entrada.trim() == "s")
             exitProcess(0)
 
-        val args = entrada.split("""\s+""".toRegex())
+        val args = entrada.split("(?=[+\\-*:])|(?<=[+\\-*:])".toRegex())
+        println(args)
         try {
-            valida(args)
             val op = args[1]
-
-            val f1 = fracao(*ints(args[0]))
-            val f2 = fracao(*ints(args[2]))
+            val f1 = fracao(args[0])
+            val f2 = fracao(args[2])
 
             val resultado = when (op) {
                 "+" -> f1 + f2
@@ -31,11 +30,7 @@ fun main() {
     }
 }
 
-fun valida(args: List<String>) {
-    if (args.any { a -> a.replace("[0-9]".toRegex(), "").length > 1 })
-        throw IllegalArgumentException("separe as operações")
+private fun fracao(texto: String): Fracao {
+    val vs = texto.split('/').map { t -> t.toInt() }
+    return if (vs.size > 1) Fracao(vs[0], vs[1]) else Fracao(vs[0])
 }
-
-private fun ints(texto: String) = texto.split('/').map { t -> t.toInt() }.toIntArray()
-
-private fun fracao(vararg vs: Int) = if (vs.size > 1) Fracao(vs[0], vs[1]) else Fracao(vs[0])
