@@ -1,4 +1,4 @@
-package org.calc;
+package org.calc
 
 import kotlin.system.exitProcess
 
@@ -12,7 +12,7 @@ class Main {
 fun main() {
     val main = Main()
     while (true) {
-        val entrada = readln().replace("\\s".toRegex(), "")
+        val entrada = readln().replace(" ", "")
         if (entrada.trim() == "s")
             exitProcess(0)
 
