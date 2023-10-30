@@ -16,12 +16,6 @@ class Fracao(numerador: Int, denominador: Int = 1) {
         if (denominador == b.denominador) fracaoSimplificada(numerador + b.numerador, denominador)
         else somarComDenomiadorComum(b)
 
-    private fun somarComDenomiadorComum(b: Fracao) =
-        fracaoSimplificada(
-            numerador * b.denominador + b.numerador * denominador,
-            denominador * b.denominador
-        )
-
     operator fun minus(b: Fracao) = plus(Fracao(-b.numerador, b.denominador))
 
     operator fun times(b: Fracao) = fracaoSimplificada(numerador * b.numerador, denominador * b.denominador)
@@ -37,6 +31,12 @@ class Fracao(numerador: Int, denominador: Int = 1) {
         }
         require(b.numerador != 0) { "Não é possível dividir por zero" }
     }
+
+    private fun somarComDenomiadorComum(b: Fracao) =
+        fracaoSimplificada(
+            numerador * b.denominador + b.numerador * denominador,
+            denominador * b.denominador
+        )
 
     private fun fracaoSimplificada(numerador: Int, denominador: Int): Fracao {
         val mdc = mdc(numerador, denominador)
