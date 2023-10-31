@@ -21,11 +21,9 @@ tasks.jar {
     }
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-//    from(sourceSets.main.get().output)
-//    dependsOn(configurations.runtimeClasspath)
-    from({
+    from(
         configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
-    })
+    )
 }
 
 val run: JavaExec by tasks

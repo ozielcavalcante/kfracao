@@ -32,7 +32,6 @@ fun main() {
 }
 
 fun fracao(texto: String): Fracao {
-    val vs = texto.split('/').map { t -> t.toInt() }
+    val vs = texto.split('/').map { it.toInt() }
     return if (vs.size > 1) Fracao(vs[0], vs[1]) else Fracao(vs[0])
 }
-
